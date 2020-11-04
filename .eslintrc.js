@@ -2,11 +2,11 @@ module.exports = {
   root: true,
   parserOptions: {
     parser: 'babel-eslint',
+    ecmaVersion: 2018,
     sourceType: 'module'
   },
   env: {
     browser: true,
-    node: true,
     es6: true
   },
   globals: {
@@ -30,24 +30,14 @@ module.exports = {
       singleline: 'never',
       multiline: 'never'
     }],
-    // html元素禁止自闭
+    // 标签禁止自闭
     'vue/html-self-closing': ['error', {
       html: {
         normal: 'never',
         component: 'never'
       }
     }],
-    // 允许 v-html
-    'vue/no-v-html': 0,
-    // 允许单行元素
-    'vue/singleline-html-element-content-newline': 0,
-    // 回调 防止误报
-    'standard/no-callback-literal': 0,
     // 函数左括号不加空格
-    'space-before-function-paren': ['error', 'never'],
-    // 不检查 回调容错
-    'handle-callback-err': 0,
-    // 关闭console警告
-    'no-console': 0
+    'space-before-function-paren': ['error', 'never']
   }
 }

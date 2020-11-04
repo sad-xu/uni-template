@@ -1,15 +1,12 @@
 import Vue from 'vue'
 import App from './App'
-
-import * as filter from 'utils/filter.js'
+// import uView from 'uview-ui'
 
 Vue.config.productionTip = false
 
-App.mpType = 'app'
+// Vue.use(uView)
 
-for (const key in filter) {
-  Vue.filter(key, filter[key])
-}
+App.mpType = 'app'
 
 const app = new Vue({
   ...App
