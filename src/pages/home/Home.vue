@@ -22,7 +22,8 @@ export default {
         { title: 'uni简介', url: '/pages/introduction/Introduction' },
         { title: '开发工具', url: '/pages/devTools/DevTools' },
         { title: '新建项目', url: '/pages/newProject/NewProject' },
-        { title: '开发准备' }
+        { title: '开发准备' },
+        { title: 'MORE...' }
       ]
     }
   },

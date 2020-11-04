@@ -33,6 +33,12 @@
       "style": {
 				"navigationBarTitleText": "开发工具"
 			}
+    },
+    {
+      "path": "pages/newProject/NewProject",
+      "style": {
+				"navigationBarTitleText": "新建项目"
+			}
     }
 	],
 	"globalStyle": {

@@ -24,13 +24,10 @@ export default {
 
 page {
   background-color: #f8f8f8;
-  padding: 0 20rpx;
+  padding-top: 20rpx;
 }
 
-// .topic {
-//   font-size: 40rpx;
-//   font-weight: bold;
-//   color: $uni-color-primary;
-//   padding: 20rpx 40rpx;
-// }
+.uni-tag {
+  display: inline-flex !important;
+}
 </style>
