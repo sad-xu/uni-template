@@ -1,7 +1,12 @@
 <template>
   <view>
     <!--  -->
-    TODO: 平台 - 语言 - 框架
+    <text class="line-title">
+      平台 - 语言 - 框架
+    </text>
+    <view class="img-wrapper platform-img">
+      <image mode="aspectFit" src="@/static/platform.png" @tap="openPlatform"></image>
+    </view>
     <!--  -->
     <text class="line-title">
       框架对比
@@ -11,8 +16,8 @@
     <view class="line-title">
       Taro 和 uni-app 对比
     </view>
-    <view class="baidu-img">
-      <image mode="aspectFit" src="@/static/baiduzhishu.png" @tap="handleImgTap"></image>
+    <view class="img-wrapper">
+      <image mode="aspectFit" src="@/static/baiduzhishu.png" @tap="openBaiduZhishu"></image>
     </view>
     <view class="compare-table">
       <view class="row table-header">
@@ -119,12 +124,18 @@ export default {
     })
   },
   methods: {
-    handleImgTap(e) {
+    openBaiduZhishu() {
       uni.previewImage({
-        urls: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/doc/uniapp4@2x.png'
+        urls: [require('@/static/baiduzhishu.png')]
+      })
+    },
+    openPlatform() {
+      uni.previewImage({
+        urls: [require('@/static/platform.png')]
       })
     },
     initChart(canvas) {
+      // console.log(uni.createSelectorQuery().select('#aaa').context())
       const chartWrapper = this.$el.querySelector('#chart-wrapper')
       const chart = new F2.Chart({
         el: canvas,
@@ -179,15 +190,12 @@ export default {
 <style lang="scss" scoped>
 #chart-wrapper {
   width: 100%;
-  height: 600rpx;
+  height: 400px;
   margin-bottom: 30rpx;
 }
 
-.baidu-img {
-  padding: 0 30rpx;
-  image {
-    width: 100%;
-  }
+.platform-img {
+  margin: 30rpx 0 40rpx;
 }
 
 .compare-table {
@@ -196,6 +204,7 @@ export default {
   border: 1px solid $uni-border-color;
   border-bottom: 0;
   border-left: 0;
+  margin-bottom: 60rpx;
   .row {
     display: flex;
     > view {

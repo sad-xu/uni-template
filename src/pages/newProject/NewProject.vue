@@ -54,7 +54,6 @@
         {{ vscodeConfig }}
       </text>
     </view>
-
     <view class="sub-box">
       <view class="sub-title">
         开发环境额外依赖
@@ -68,6 +67,28 @@
       <text class="line-code">
         node-sass + sass-loader => scss编译
       </text>
+    </view>
+    <!--  -->
+    <view class="title">
+      内置功能
+    </view>
+    <view class="line-text">
+      路由 pages.json
+    </view>
+    <view class="line-text">
+      Vuex
+    </view>
+    <view class="line-text">
+      globalData 小程序全局变量
+    </view>
+    <view class="line-text">
+      响应式单位 rpx ≈ vw
+    </view>
+    <view class="line-text">
+      请求 需要封装
+    </view>
+    <view class="line-text">
+      预置全局 scss 变量
     </view>
   </view>
 </template>

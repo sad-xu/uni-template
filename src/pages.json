@@ -13,8 +13,8 @@
     {
       "path": "pages/compare/Compare",
       "style": {
-				"navigationBarTitleText": "框架对比"
-			}
+        "navigationBarTitleText": "框架对比"
+      }
     },
     {
       "path": "pages/introduction/Introduction",
@@ -25,7 +25,7 @@
     {
       "path": "pages/introduction/Case",
       "style": {
-				"navigationBarTitleText": "案例"
+				"navigationBarTitleText": "外部网站"
 			}
     },
     {
@@ -39,14 +39,35 @@
       "style": {
 				"navigationBarTitleText": "新建项目"
 			}
+    },
+    {
+      "path": "pages/wideScreen/WideScreen",
+      "style": {
+				"navigationBarTitleText": "宽屏适配"
+			}
+    },
+    {
+      "path": "pages/problems/Problems",
+      "style": {
+				"navigationBarTitleText": "已发现的问题"
+			}
     }
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni",
 		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
-	},
+    "backgroundColor": "#F8F8F8"
+  },
+  "leftWindow": {
+    "path": "responsive/LeftWindow.vue",
+    "style": {
+      "width": "200px"
+    },
+    "matchMedia": {
+      "minWidth": 768
+    }
+  },
 	"condition" : {
 		"current": 0,
 		"list": [

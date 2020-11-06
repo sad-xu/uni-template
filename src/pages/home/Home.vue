@@ -22,8 +22,8 @@ export default {
         { title: 'uni简介', url: '/pages/introduction/Introduction' },
         { title: '开发工具', url: '/pages/devTools/DevTools' },
         { title: '新建项目', url: '/pages/newProject/NewProject' },
-        { title: '开发准备' },
-        { title: 'MORE...' }
+        { title: '宽屏适配', url: '/pages/wideScreen/WideScreen' },
+        { title: '已发现的问题', url: '/pages/problems/Problems' }
       ]
     }
   },
@@ -55,6 +55,7 @@ export default {
   }
 
   .box {
+    font-size: 30rpx;
     display: flex;
     flex-grow: 1;
     flex-direction: column;

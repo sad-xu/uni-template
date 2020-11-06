@@ -31,7 +31,7 @@ export default {
   data() {
     return {
       hbuilderText: [
-        '官方出品，真机调试必备',
+        '官方出品，真机直连调试必备',
         '针对uni-app有针对性优化，如代码提示',
         '部分跨端配置方便',
         '插件不完善',
@@ -47,7 +47,7 @@ export default {
         'VSCode 作为主要编辑器',
         '基础开发：VSCode',
         '发布前配置：HBuilder',
-        '真机调试（外网）：HBuilder + iTunes + iTools + 微信开发者工具'
+        '真机调试（外网直连）：HBuilder + iTunes + iTools + 微信开发者工具'
       ]
     }
   }

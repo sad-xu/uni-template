@@ -25,11 +25,20 @@ export default {
 page {
   background-color: #f8f8f8;
   padding-top: 20rpx;
+  // min-height: 100%;
 }
 
 .uni-tag {
   display: inline-flex !important;
 }
+.uni-section {
+  background-color: #f1f1f1 !important;
+}
+.uni-section__head-tag {
+  background-color: #007aff !important;
+}
+
+//
 
 .line-title {
   display: block;
@@ -50,4 +59,16 @@ page {
   word-break: break-all;
   color: #999;
 }
+
+.img-wrapper {
+  padding: 0 30rpx;
+  image {
+    width: 100%;
+  }
+}
+
+.cell-group {
+  margin: 20rpx 0;
+}
+
 </style>
