@@ -19,8 +19,6 @@
 </template>
 
 <script>
-import F2 from '@antv/f2'
-
 export default {
   data() {
     return {
@@ -44,11 +42,11 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      const chartWrapper = this.$el.querySelector('#chart-wrapper')
-      const canvas = document.createElement('canvas')
-      canvas.id = 'canvas'
-      chartWrapper.appendChild(canvas)
-      this.initChart(canvas)
+      // const chartWrapper = this.$el.querySelector('#chart-wrapper')
+      // const canvas = document.createElement('canvas')
+      // canvas.id = 'canvas'
+      // chartWrapper.appendChild(canvas)
+      // this.initChart(canvas)
     })
   },
   methods: {

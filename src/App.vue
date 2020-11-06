@@ -30,4 +30,24 @@ page {
 .uni-tag {
   display: inline-flex !important;
 }
+
+.line-title {
+  display: block;
+  padding: 20rpx;
+  font-weight: bold;
+  font-size: 32rpx;
+}
+
+.line-text {
+  display: block;
+  padding: 20rpx;
+}
+.line-code {
+  display: block;
+  font-size: 24rpx;
+  font-style: italic;
+  padding: 10rpx 10rpx 10rpx 20rpx;
+  word-break: break-all;
+  color: #999;
+}
 </style>

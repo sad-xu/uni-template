@@ -80,7 +80,7 @@
             }
         },
         "devServer" : {
-            "port" : 8345,
+            "port" : 8765,
 			"proxy": {
 				"/test": {
 					"target": "http://192.168.6.207"

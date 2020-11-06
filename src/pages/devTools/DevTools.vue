@@ -4,14 +4,14 @@
     <view>
       <uni-tag class="tag" mark text="HBuilder" type="primary"></uni-tag>
     </view>
-    <text v-for="item in hbuilderText" :key="item" class="line">
+    <text v-for="item in hbuilderText" :key="item" class="line-text">
       {{ item }}
     </text>
     <!--  -->
     <view>
       <uni-tag class="tag" mark text="VSCode" type="primary"></uni-tag>
     </view>
-    <text v-for="item in vscodeText" :key="item" class="line">
+    <text v-for="item in vscodeText" :key="item" class="line-text">
       {{ item }}
     </text>
     <!--  -->
@@ -20,7 +20,7 @@
     <view class="recommend">
       推荐操作
     </view>
-    <text v-for="item in recommendText" :key="item" class="line">
+    <text v-for="item in recommendText" :key="item" class="line-text">
       {{ item }}
     </text>
   </view>
@@ -62,13 +62,8 @@ export default {
   margin-left: -20rpx;
 }
 
-.line {
-  display: block;
-  padding: 20rpx;
-}
-
 .recommend {
-  font-size: 32rpx;
+  font-size: 30rpx;
   font-weight: bold;
   margin-top: 20rpx;
 }
