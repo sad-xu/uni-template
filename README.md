@@ -1,59 +1,5 @@
 # uni 示例模板
 
-## 框架对比
-
-平台
-原生: iOS Android
-小程序: 微信、支付宝、百度、字节、QQ、快应用（vivo 、oppo、华为）、360
-网页：移动端、Pad、PC
-
-(Objective-C Swift Java Kotlin) Dart JavaScript
-
-Flutter react Vue
-
-react native
-weex
-flutter
-PWA
-
-uni-app taro wepy
-
-## uni 简介
-
-使用 Vue.js 开发所有前端应用的框架
-
-开发者编写一套代码，可发布到iOS、Android、Web、以及各种小程序（微信/支付宝/百度/头条/QQ/钉钉/淘宝）、快应用（vivo 、oppo、华为）、360小程序（仅 windows平台支持，需要在360浏览器中打开）
-
-600万开发者用户，几十万应用案例、12亿手机端月活用户，数千款uni-app插件、70+微信/qq群。阿里小程序工具官方内置uni-app，腾讯课堂官方为uni-app录制培训课程
-
-## 开发工具
-
-VScode + HBuilder
-
-iOS真机调试：iTunes + iTools + 微信开发者工具
-
-* HBuilder
-
-  真机调试必备 插件不完善 整体体验不佳
-
-* VSCode
-
-  插件完善 体验好
-
-HBuilder 作为启动工具，VSCode 作为主要编辑器
-
-## 新建项目
-
-* 通过 HBuilder 创建
-
-  项目依赖本地 HBuilder，后端无法自动打包发布
-
-* 通过 cli 创建
-
-  所有依赖都在项目下，可手动管理，具有一致性
-
-## 项目结构
-
 ## 依赖安装前
 
 `npm config set registry https://registry.npm.taobao.org/ -g`
@@ -86,8 +32,67 @@ stylelint-config-standard: css样式规范
 node-sass + sass-loader: scss编译
 ```
 
-## 缺陷
+## 坑
 
-1. 路由名直接映射文件结构 无法自定义
+### 模板 :style
 
-2. 打包输出指定位置 UNI_OUTPUT_DIR=./dist/h5
+```html
+<!-- 微信小程序 -->
+<!-- 无法使用字符串 -->
+<view :style="`width: ${a}px;`"></view>
+<!-- 用对象的形式 -->
+<view :style="{width: `${a}px`"></view>
+```
+
+### uni.createSelectorQuery fields
+
+```js
+// 微信小程序
+// 能获取到节点，但获取不到节点信息 data = null
+uni.createSelectorQuery().select('.selected-range').fields({
+  rect: true
+}, data => {
+  console.log('fields', data)
+}).exec()
+// 添加 .in(this)
+uni.createSelectorQuery().in(this).select('.selected-range').fields({...})
+```
+
+### uview-ui u-skeleton
+
+一个页面里的多个组件分别使用骨架屏，只有第一个生效
+
+默认选择器范围是整个页面，需要添加 `.in(this.$parent)` 只查询父组件
+
+### 修改打包输出目录
+
+```js
+// package.json
+// UNI_OUTPUT_DIR=./dist/h5
+```
+
+## 依赖版本更新过快且不稳定
+
+必须维护 `package-lock.json` 或定死版本号
+
+## `Firefox` `safari`无法解析特定日期 `2020-10-10 10:10:10`
+
+不使用 `new Date(2020-10-10 10:10:10)`
+改用日期库如 `dayjs`
+
+## 部分IOS echarts 圆形阴影显示为矩形
+
+```js
+// color 使用径向渐变定义
+color: {
+  type: 'radial',
+  x: 0.4,
+  y: 0.3,
+  r: 0.5,
+  colorStops: [{
+    offset: 0, color: 'rgb(144,149,255)'
+  }, {
+    offset: 1, color: '#5460f9'
+  }]
+}
+```

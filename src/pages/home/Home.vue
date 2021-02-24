@@ -1,15 +1,33 @@
 <template>
   <view class="home">
-    <view class="logo-wrapper">
-      <image class="logo" src="@/static/logo.png"></image>
+    <view class="range-wrapper">
+      <view
+        v-for="(item, index) in rangeList" :key="item" class="range"
+        :class="index === Number(selectedRangeIndex) ? 'selected-range' : ''"
+        @tap="selectedRangeIndex = index">
+        {{ item }}
+      </view>
+      <view v-show="lineLeft" class="bottom-line" :style="{left:`${lineLeft}px`}"></view>
     </view>
-    <uni-grid :column="3" @change="handleGridTap">
-      <uni-grid-item v-for="(item, index) in topicList" :key="index" :index="index">
-        <view class="box">
-          <text>{{ item.title }}</text>
+    <view class="info afa-skeleton">
+      <afa-skeleton :loading="loading" bg-color="rgba(0,0,0,0)" animation></afa-skeleton>
+      <view class="info-header">
+        <view class="afa-skeleton-fillet">
+          2000-01-01
         </view>
-      </uni-grid-item>
-    </uni-grid>
+        <view class="afa-skeleton-fillet">
+          xxx
+        </view>
+      </view>
+      <view class="info-title afa-skeleton-fillet">
+        222222222222222222
+      </view>
+    </view>
+    <!-- <afa-ec-canvas
+      ref="CommonChart"
+      :nodata="nodata"
+      canvas-id="common-chart">
+    </afa-ec-canvas> -->
   </view>
 </template>
 
@@ -17,22 +35,133 @@
 export default {
   data() {
     return {
-      topicList: [
-        { title: '框架对比', url: '/pages/compare/Compare' },
-        { title: 'uni简介', url: '/pages/introduction/Introduction' },
-        { title: '开发工具', url: '/pages/devTools/DevTools' },
-        { title: '新建项目', url: '/pages/newProject/NewProject' },
-        { title: '宽屏适配', url: '/pages/wideScreen/WideScreen' },
-        { title: '已发现的问题', url: '/pages/problems/Problems' }
-      ]
+      loading: true,
+      nodata: false,
+      //
+      selectedRangeIndex: 0,
+      rangeList: ['近一天', '近一周', '近一年'],
+      lineLeft: 0
     }
   },
+  watch: {
+    // 下划线位置
+    selectedRangeIndex: {
+      handler(index) {
+        setTimeout(() => {
+          uni.createSelectorQuery().in(this).select('.selected-range').fields({
+            size: true,
+            rect: true
+          }, data => {
+            this.lineLeft = data.width / 2 + data.left
+          }).exec()
+        }, 0)
+      },
+      immediate: true
+    }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      setTimeout(() => {
+        this.loading = false
+      }, 3000)
+    })
+  },
   methods: {
-    handleGridTap({ detail }) {
-      const index = detail.index
-      console.log(index)
-      uni.navigateTo({
-        url: this.topicList[index].url
+    initChart() {
+      this.$refs.CommonChart.setOption({
+        grid: {
+          show: true,
+          borderColor: '#eee',
+          left: 1,
+          top: '15%',
+          right: 1,
+          bottom: '10%',
+          containLabel: true
+        },
+        xAxis: {
+          type: 'time',
+          axisLine: {
+            show: false
+          },
+          axisLabel: {
+            color: '#999',
+            align: 'left',
+            showMaxLabel: false
+          },
+          axisTick: false,
+          splitLine: false,
+          axisPointer: {
+            show: true,
+            triggerTooltip: false,
+            snap: true,
+            lineStyle: {
+              color: '#e5e5e5'
+            },
+            label: {
+              show: true,
+              color: '#999',
+              backgroundColor: '#fff',
+              padding: 2
+            }
+          }
+        },
+        yAxis: [{
+          min: 0,
+          axisLine: {
+            show: false
+          },
+          axisLabel: {
+            color: '#999'
+          },
+          axisTick: false,
+          splitLine: false
+        }, {
+          min: 0,
+          axisLine: {
+            show: false
+          },
+          axisLabel: {
+            color: '#999'
+          },
+          axisTick: false,
+          splitLine: false
+        }],
+        series: [{
+          type: 'line',
+          name: '当时热度',
+          itemStyle: {
+            opacity: 0
+          },
+          lineStyle: {
+            color: '#589be2'
+          },
+          areaStyle: {
+            color: {
+              type: 'linear',
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [{
+                offset: 0, color: '#e7ebff'
+              }, {
+                offset: 1, color: '#fff'
+              }]
+            }
+          },
+          data: []
+        }, {
+          type: 'line',
+          name: '累计热度',
+          yAxisIndex: 1,
+          itemStyle: {
+            opacity: 0
+          },
+          lineStyle: {
+            color: '#fd7779'
+          },
+          data: []
+        }]
       })
     }
   }
@@ -40,26 +169,46 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .home {
-    padding: 0 40rpx;
+.range-wrapper {
+  position: relative;
+  display: flex;
+  color: #fff;
+  padding: 20rpx 40rpx;
+  margin-bottom: 20rpx;
+  .range {
+    font-size: 24rpx;
+    margin-right: 30rpx;
+    opacity: 0.5;
+    transition: transform 0.3s, opacity 0.3s;
   }
-
-  .logo-wrapper {
-    display: flex;
-    justify-content: center;
-    padding: 60rpx 0;
-    .logo {
-      width: 200rpx;
-      height: 200rpx;
-    }
+  .selected-range {
+    opacity: 1;
+    transform: scale(1.2);
   }
-
-  .box {
-    font-size: 30rpx;
+  .bottom-line {
+    position: absolute;
+    bottom: 0;
+    height: 4rpx;
+    width: 50rpx;
+    border-radius: 4rpx;
+    background-color: #fff;
+    transition: left 0.3s;
+    transform: translateX(-50%);
+  }
+}
+.info {
+  padding: 10rpx 30rpx;
+  .info-header {
     display: flex;
-    flex-grow: 1;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
+    font-size: 22rpx;
+    color: #999;
   }
+  .info-title {
+    font-size: 24rpx;
+    color: #333;
+    margin-top: 20rpx;
+  }
+}
 </style>
