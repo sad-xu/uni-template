@@ -5,9 +5,15 @@
 	},
 	"pages": [
 		{
-			"path": "pages/home/Home",
+			"path": "pages/home/home",
 			"style": {
 				"navigationBarTitleText": "首页"
+			}
+    },
+    {
+      "path": "pages/search/search",
+			"style": {
+				"navigationBarTitleText": "搜索"
 			}
     }
 	],

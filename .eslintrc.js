@@ -10,7 +10,9 @@ module.exports = {
     es6: true
   },
   globals: {
-    uni: true
+    uni: true,
+    wx: true,
+    dd: true
   },
   extends: [
     '@vue/standard',

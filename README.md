@@ -32,6 +32,24 @@ stylelint-config-standard: css样式规范
 node-sass + sass-loader: scss编译
 ```
 
+## 内置功能
+
+### afa-ec-canvas
+
+h5 和 小程序 都能使用的 `echarts` 二次封装组件
+
+### afa-skeleton *已废弃*
+
+基于 `uview-ui` -- `skeleton` 组件的优化版，不推荐在小程序中使用
+
+### afa-simple-skeleton
+
+基于 `element-ui` -- `skeleton` 组件的优化版
+
+### 分享
+
+小程序分享 + 微信网页分享，由 `mixin` 实现
+
 ## 坑
 
 ### 模板 :style
@@ -58,22 +76,12 @@ uni.createSelectorQuery().select('.selected-range').fields({
 uni.createSelectorQuery().in(this).select('.selected-range').fields({...})
 ```
 
-### uview-ui u-skeleton
-
-一个页面里的多个组件分别使用骨架屏，只有第一个生效
-
-默认选择器范围是整个页面，需要添加 `.in(this.$parent)` 只查询父组件
-
 ### 修改打包输出目录
 
 ```js
 // package.json
 // UNI_OUTPUT_DIR=./dist/h5
 ```
-
-## 依赖版本更新过快且不稳定
-
-必须维护 `package-lock.json` 或定死版本号
 
 ## `Firefox` `safari`无法解析特定日期 `2020-10-10 10:10:10`
 

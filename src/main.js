@@ -1,10 +1,17 @@
 import Vue from 'vue'
 import App from './App'
 import uView from 'uview-ui'
+import mixin from '@/utils/mixin'
+
+// #ifdef H5
+import env from 'zrender/lib/core/env'
+env.domSupported = true
+// #endif
 
 Vue.config.productionTip = false
 
 Vue.use(uView)
+Vue.mixin(mixin)
 
 App.mpType = 'app'
 
@@ -26,7 +33,5 @@ uni.navigateTo = function(params) {
   })
 }
 
-const app = new Vue({
-  ...App
-})
+const app = new Vue(App)
 app.$mount()

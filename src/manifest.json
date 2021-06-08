@@ -90,6 +90,7 @@
                 }
             }
         },
+        "publicPath": "//cdn.com/h5/",
         "router" : {
             "mode" : "history"
         }

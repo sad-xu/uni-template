@@ -18,24 +18,18 @@
 </template>
 
 <script>
-/*
-  需要从echarts官网定制下载 https://echarts.apache.org/v4/zh/builder.html v4.9.0
-  并作出如下修改
-  L1  eslint-disable
-  L68
-    // #ifdef H5
-    env = detect(navigator.userAgent);
-    // #endif
-    // #ifndef H5
-      ...
-    // #endif
-  L110
-*/
+import * as echarts from 'echarts/core'
+import { LineChart } from 'echarts/charts'
+import { GridComponent } from 'echarts/components'
+import { CanvasRenderer } from 'echarts/renderers'
 
-import * as echarts from './echarts'
 // #ifndef H5
 import WxCanvas from './wx-canvas'
 // #endif
+
+echarts.use([
+  LineChart, GridComponent, CanvasRenderer
+])
 
 // #ifndef H5
 function wrapTouch(event) {
@@ -71,7 +65,10 @@ export default {
   },
   mounted() {
     // #ifdef H5
-    const chart = echarts.init(document.getElementById(this.canvasId))
+    const chart = echarts.init(document.getElementById(this.canvasId), null, {
+      locale: 'ZH',
+      useDirtyRect: true
+    })
     chart.showLoading('default', {
       text: '',
       color: '#201178',
@@ -111,6 +108,11 @@ export default {
       if (this.$curChart) {
         this.$curChart.hideLoading()
         this.$curChart.setOption(options)
+      } else {
+        // 防止过快
+        setTimeout(() => {
+          this.setOption(options)
+        }, 200)
       }
       // #endif
     },

@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>
             <%= htmlWebpackPlugin.options.title %>
         </title>
+        <meta name="description" content="描述描述">
+        <meta property="og:title" content="标题">
+        <meta property="og:image" content="https://p5js.org/assets/img/favicon.ico">
+        <meta property="og:description" content="描述描述">
         <link rel="icon" href="<%= BASE_URL %>favicon.png">
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -24,6 +27,8 @@
         </noscript>
         <div id="app"></div>
         <!-- built files will be auto injected -->
-    </body>
 
+        <!-- <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+        <script type="text/javascript" src="https://g.alicdn.com/dingding/dingtalk-jsapi/2.10.3/dingtalk.open.js"></script> -->
+    </body>
 </html>

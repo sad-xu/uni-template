@@ -7,3 +7,10 @@ export function commonRequest() {
     method: 'GET'
   })
 }
+
+export function getWxAuth(url) {
+  return request({
+    url: 'http://share.afa.ai/api/core/common/sys/wx/jsapi/staffprod/getJsapiSignature?url=' + encodeURIComponent(url),
+    method: 'get'
+  })
+}
