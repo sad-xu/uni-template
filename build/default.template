@@ -1,0 +1,30 @@
+upstream backend {
+    server $BACKEND_URL:$BACKEND_PORT;
+}
+
+
+server {
+    client_max_body_size 50m;
+    listen 80;
+    location / {
+		root /web/dist/h5;
+		index index.html;
+		try_files $uri $uri/ /index.html;
+		expires max;
+    }
+
+    location ^~ /index.html {
+        root /web/dist/h5;
+		index index.html;
+		add_header Cache-Control no-cache;
+    }
+
+	location ^~ /dc/ {
+		proxy_set_header X-Real-IP  $remote_addr;
+		proxy_set_header Host $host;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_pass http://backend;
+	}
+
+}
+

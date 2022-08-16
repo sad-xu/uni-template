@@ -12,34 +12,30 @@ module.exports = {
   globals: {
     uni: true,
     wx: true,
-    dd: true
+    plus: true,
+    getApp: true,
+    getCurrentPages: true
   },
-  extends: [
-    '@vue/standard',
-    'plugin:vue/recommended'
-  ],
+  extends: ['@vue/standard', 'plugin:vue/recommended'],
   rules: {
     // 多属性换行规则
-    'vue/max-attributes-per-line': [2, {
-      singleline: 4,
-      multiline: {
-        max: 3,
-        allowFirstLine: false
+    'vue/max-attributes-per-line': [
+      2,
+      {
+        singleline: 4,
+        multiline: {
+          max: 3,
+          allowFirstLine: false
+        }
       }
-    }],
+    ],
     // 标签结束不换行
-    'vue/html-closing-bracket-newline': [2, {
-      singleline: 'never',
-      multiline: 'never'
-    }],
+    'vue/html-closing-bracket-newline': 0,
     // 标签禁止自闭
-    'vue/html-self-closing': ['error', {
-      html: {
-        normal: 'never',
-        component: 'never'
-      }
-    }],
+    'vue/html-self-closing': 0,
     // 函数左括号不加空格
-    'space-before-function-paren': ['error', 'never']
+    'space-before-function-paren': ['error', 'never'],
+    'vue/singleline-html-element-content-newline': 0,
+    'vue/custom-event-name-casing': 0
   }
 }

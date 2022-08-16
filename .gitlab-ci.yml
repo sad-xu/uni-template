@@ -1,0 +1,66 @@
+# To contribute improvements to CI/CD templates, please follow the Development guide at:
+# https://docs.gitlab.com/ee/development/cicd/templates.html
+# This specific template is located at:
+# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Docker.gitlab-ci.yml
+
+# Build a Docker image with CI/CD and push to the GitLab registry.
+# Docker-in-Docker documentation: https://docs.gitlab.com/ee/ci/docker/using_docker_build.html
+#
+# This template uses one generic job with conditional builds
+# for the default branch and all other (MR) branches.
+variables:
+  GIT_STRATEGY: clone
+  IMAGE_NAME: digital-collection-h5
+  REGISTRY: dockershare:2333
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  tags:
+    - dev
+  script:
+    - npm config set sass_binary_site https://npm.taobao.org/mirrors/node-sass/ -g
+    - npm i
+    - npm run build
+    - docker build -t $IMAGE_NAME:$CI_COMMIT_SHORT_SHA -f `pwd`/build/Dockerfile .
+    - docker tag $IMAGE_NAME:$CI_COMMIT_SHORT_SHA $REGISTRY/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA
+    - docker push $REGISTRY/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA
+
+deploy-dev:
+  stage: deploy
+  tags:
+    - dev
+  script:
+    - |
+      if [ $(docker ps -aq --filter name=^/$IMAGE_NAME$) ]; then
+        docker rm -f $IMAGE_NAME
+      fi
+    - docker run -d -p 8075:80 -e BACKEND_URL=10.0.0.80 -e BACKEND_PORT=8085 -e WECHAT_URL=10.0.0.226 -e WECHAT_PORT=20207 -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro --name $IMAGE_NAME  $REGISTRY/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA
+    - echo "docker run -d -p 8075:80 -e BACKEND_URL=10.0.0.80 -e BACKEND_PORT=8085 -e WECHAT_URL=10.0.0.226 -e WECHAT_PORT=20207 -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro --name $IMAGE_NAME  $REGISTRY/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA"
+  only:
+    - dev
+
+.master_script: &script_definition
+  stage: deploy
+  script:
+    - |
+      if [ $(docker ps -aq --filter name=^/$IMAGE_NAME$) ]; then
+        docker rm -f $IMAGE_NAME
+      fi
+    - docker run -d -p 8075:80 -e BACKEND_URL=10.0.0.226 -e BACKEND_PORT=8085 -e WECHAT_URL=10.0.0.226 -e WECHAT_PORT=20207 -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro --name $IMAGE_NAME  $REGISTRY/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA
+    - echo "docker run -d -p 8075:80 -e BACKEND_URL=10.0.0.226 -e BACKEND_PORT=8085 -e WECHAT_URL=10.0.0.226 -e WECHAT_PORT=20207 -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro --name $IMAGE_NAME  $REGISTRY/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA"
+  only:
+    - master
+
+deploy-dc:
+  tags:
+    - dc
+  <<: *script_definition
+
+deploy-dc2:
+  tags:
+    - dc2
+  <<: *script_definition

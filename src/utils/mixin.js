@@ -23,7 +23,7 @@ export default {
         link: url, // 分享链接，必须与当前页面对应的公众号JS安全域名一致
         imgUrl: 'https://p5js.org/assets/img/favicon.ico' // 必须绝对路径
       }
-      jweixin.ready(function() {
+      jweixin.ready(() => {
         jweixin.updateAppMessageShareData(shareMsg)
         jweixin.updateTimelineShareData(shareMsg)
       })
@@ -49,8 +49,4 @@ export default {
     }
   }
   // #endif
-}
-
-export async function wxShare() {
-
 }

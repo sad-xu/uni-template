@@ -1,35 +1,31 @@
 {
   "easycom": {
     "^u-(.*)": "uview-ui/components/u-$1/u-$1.vue",
-    "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
-	},
-	"pages": [
-		{
-			"path": "pages/home/home",
-			"style": {
-				"navigationBarTitleText": "首页"
-			}
+    "^uni-((?!(shadow-root)).*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+  },
+  "pages": [
+    {
+      "path": "pages/home/index",
+      "style": {
+        "navigationBarTitleText": "首页"
+      }
     },
     {
       "path": "pages/search/search",
-			"style": {
-				"navigationBarTitleText": "搜索"
-			}
+      "style": {
+        "navigationBarTitleText": "搜索"
+      }
     }
-	],
-	"globalStyle": {
-		"navigationBarTextStyle": "white",
-		"navigationBarTitleText": "",
-		"navigationBarBackgroundColor": "#201178",
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "NAME",
+    "navigationBarBackgroundColor": "#201178",
     "backgroundColor": "#201178",
     "app-plus": {
       "softinputNavBar": "none"
     },
-    "h5": {
-
-    },
-    "mp-weixin": {
-
-    }
+    "h5": {},
+    "mp-weixin": {}
   }
 }

@@ -6,49 +6,38 @@
         :key="item"
         class="range"
         :class="index === Number(selectedRangeIndex) ? 'selected-range' : ''"
-        @tap="selectedRangeIndex = index">
+        @tap="selectedRangeIndex = index"
+      >
         {{ item }}
       </view>
       <view
         v-show="lineLeft"
         class="bottom-line"
-        :style="{ left: `${lineLeft}px` }"></view>
+        :style="{ left: `${lineLeft}px` }"
+      ></view>
     </view>
     <view class="info">
       <afa-simple-skeleton is-absolute :loading="loading" :skeleton="skeleton">
         <view class="info-header">
-          <view>
-            2000-01-01
-          </view>
-          <view>
-            xxx
-          </view>
+          <view> 2000-01-01 </view>
+          <view> xxx </view>
         </view>
-        <view class="info-title">
-          222222222222222222
-        </view>
+        <view class="info-title"> 222222222222222222 </view>
       </afa-simple-skeleton>
     </view>
-    <button class="jump-button" @tap="jumpToSearch">
-      Jump to search
-    </button>
+    <button class="jump-button" @tap="jumpToSearch">Jump to search</button>
     <view class="img-wrapper">
-      <img src="@/static/logo.png">
+      <img src="@/static/logo.png" />
       <view class="img"></view>
     </view>
-    <!-- <view class="chart-wrapper">
+    <view class="chart-wrapper">
       <afa-ec-canvas
         ref="CommonChart"
         :nodata="nodata"
-        canvas-id="common-chart">
+        canvas-id="common-chart"
+      >
       </afa-ec-canvas>
-    </view> -->
-    <button @tap="jumpToA">
-      AAA
-    </button>
-    <button @tap="jumpToB">
-      BBB
-    </button>
+    </view>
   </view>
 </template>
 
@@ -64,7 +53,8 @@ export default {
         [
           { marginTop: 0, width: '20%', marginRight: '60%' },
           { marginTop: 0, width: '20%' }
-        ], {}
+        ],
+        {}
       ],
       nodata: false,
       //
@@ -87,7 +77,7 @@ export default {
                 size: true,
                 rect: true
               },
-              data => {
+              (data) => {
                 this.lineLeft = data.width / 2 + data.left
               }
             )
@@ -101,8 +91,8 @@ export default {
     this.$nextTick(() => {
       setTimeout(() => {
         this.loading = false
-        // this.initChart()
-      }, 3000)
+        this.initChart()
+      }, 2000)
     })
   },
   methods: {
@@ -110,12 +100,6 @@ export default {
       uni.navigateTo({
         url: '/pages/search/search'
       })
-    },
-    jumpToA() {
-      window.location.href = 'https://cn.bing.com/'
-    },
-    jumpToB() {
-      window.open('https://cn.bing.com/')
     },
     initChart() {
       this.$refs.CommonChart.setOption({
@@ -197,7 +181,12 @@ export default {
                 ]
               }
             },
-            data: [[978307200000, 10], [978393600000, 20], [978480000000, 30], [978566400000, 50]]
+            data: [
+              [978307200000, 10],
+              [978393600000, 20],
+              [978480000000, 30],
+              [978566400000, 50]
+            ]
           }
         ]
       })

@@ -4,8 +4,6 @@
 
 `npm config set registry https://registry.npm.taobao.org/ -g`
 
-`npm config set sass_binary_site https://npm.taobao.org/mirrors/node-sass/ -g`
-
 ## VSCode 相关
 
 必装插件 `Vetur` `ESlint` `stylelint` `EditorConfig for VS Code`
@@ -15,21 +13,8 @@
 "editor.codeActionsOnSave": {
   "source.fixAll.eslint": true,
   "source.fixAll.stylelint": true
-}
-// 忽略node_modules
-"files.exclude": {
-  "**/node_modules": true
-}
-```
-
-## 开发环境额外依赖
-
-```txt
-stylelint-config-standard: css样式规范
-
-@vue/eslint-config-standard + eslint-plugin-vue + babel-eslint + eslint-plugin-import + eslint-plugin-node + eslint-plugin-promise + eslint-plugin-standard + @vue/cli-plugin-eslint: js、vue代码规范
-
-node-sass + sass-loader: scss编译
+},
+"editor.formatOnSave": true
 ```
 
 ## 内置功能
@@ -38,7 +23,7 @@ node-sass + sass-loader: scss编译
 
 h5 和 小程序 都能使用的 `echarts` 二次封装组件
 
-### afa-skeleton *已废弃*
+### afa-skeleton _已废弃_
 
 基于 `uview-ui` -- `skeleton` 组件的优化版，不推荐在小程序中使用
 
@@ -88,7 +73,7 @@ uni.createSelectorQuery().in(this).select('.selected-range').fields({...})
 不使用 `new Date(2020-10-10 10:10:10)`
 改用日期库如 `dayjs`
 
-## 部分IOS echarts 圆形阴影显示为矩形
+## 部分 IOS echarts 圆形阴影显示为矩形
 
 ```js
 // color 使用径向渐变定义

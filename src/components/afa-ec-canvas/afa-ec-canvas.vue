@@ -5,15 +5,17 @@
     <!-- #endif -->
     <!-- #ifndef H5 -->
     <canvas
-      :id="canvasId" type="2d"
-      class="ec-canvas" :canvas-id="canvasId"
+      :id="canvasId"
+      type="2d"
+      class="ec-canvas"
+      :canvas-id="canvasId"
       @touchstart="touchStart"
-      @touchmove="touchMove" @touchend="touchEnd">
+      @touchmove="touchMove"
+      @touchend="touchEnd"
+    >
     </canvas>
     <!-- #endif -->
-    <cover-view v-show="nodata" class="no-data">
-      暂无数据
-    </cover-view>
+    <cover-view v-show="nodata" class="no-data"> 暂无数据 </cover-view>
   </view>
 </template>
 
@@ -27,9 +29,7 @@ import { CanvasRenderer } from 'echarts/renderers'
 import WxCanvas from './wx-canvas'
 // #endif
 
-echarts.use([
-  LineChart, GridComponent, CanvasRenderer
-])
+echarts.use([LineChart, GridComponent, CanvasRenderer])
 
 // #ifndef H5
 function wrapTouch(event) {
@@ -76,7 +76,7 @@ export default {
       spinnerRadius: 10
     })
     this.chart = Object.freeze([chart])
-    chart.on('click', params => {
+    chart.on('click', (params) => {
       this.$emit('chart-click', params)
     })
     // chart.getZr().on('click', params => {
@@ -84,10 +84,10 @@ export default {
     // })
     // #endif
     // #ifndef H5
-    echarts.registerPreprocessor(option => {
+    echarts.registerPreprocessor((option) => {
       if (option && option.series) {
         if (option.series.length > 0) {
-          option.series.forEach(series => {
+          option.series.forEach((series) => {
             series.progressive = 0
           })
         } else if (typeof option.series === 'object') {
@@ -137,12 +137,13 @@ export default {
     // #ifndef H5
     initByNewWay() {
       const query = uni.createSelectorQuery().in(this)
-      query.select('.ec-canvas')
+      query
+        .select('.ec-canvas')
         .fields({
           node: true,
           size: true
         })
-        .exec(res => {
+        .exec((res) => {
           const canvasNode = res[0].node
           const canvasDpr = uni.getSystemInfoSync().pixelRatio
           const canvasWidth = res[0].width
@@ -168,7 +169,7 @@ export default {
         devicePixelRatio: canvasDpr
       })
       canvas.setChart($curChart)
-      $curChart.on('click', params => {
+      $curChart.on('click', (params) => {
         this.$emit('chart-click', params)
       })
       $curChart.showLoading('default', {
@@ -187,7 +188,7 @@ export default {
           node: true,
           size: true
         })
-        .exec(res => {
+        .exec((res) => {
           const canvasNode = res[0].node
           opt.canvas = canvasNode
           uni.canvasToTempFilePath(opt)

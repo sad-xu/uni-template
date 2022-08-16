@@ -5,20 +5,23 @@
     </view>
     <transition name="fade">
       <view
-        v-if="loading" class="afa-skeleton"
-        :class="{ absolute: isAbsolute }">
+        v-if="loading"
+        class="afa-skeleton"
+        :class="{ absolute: isAbsolute }"
+      >
         <template v-for="(row, i) in skeleton">
           <!-- 一行多个 -->
           <view v-if="Array.isArray(row)" :key="i" class="afa-skeleton-row">
             <view
-              v-for="(item, j) in row" :key="j"
-              class="afa-skeleton-item" :style="[item]">
+              v-for="(item, j) in row"
+              :key="j"
+              class="afa-skeleton-item"
+              :style="[item]"
+            >
             </view>
           </view>
           <!-- 单个 -->
-          <view
-            v-else :key="i"
-            class="afa-skeleton-item" :style="[row]">
+          <view v-else :key="i" class="afa-skeleton-item" :style="[row]">
           </view>
         </template>
       </view>

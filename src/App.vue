@@ -1,8 +1,14 @@
 <script>
+import errTracker from './utils/errTracker'
 
 export default {
   onLaunch() {
     console.log('App Launch')
+    // #ifdef H5
+    window.addEventListener('unhandledrejection', (e) => {
+      errTracker.uploadErr(e)
+    })
+    // #endif
   },
   onShow() {
     console.log('App Show')
@@ -14,21 +20,39 @@ export default {
     console.log('App Err')
   },
   onUnhandledRejection() {
-    console.log('App UnhandledRejection')
-  }
+    // #ifndef H5
+    errTracker.uploadErr(err)
+    // #endif
+  },
+  onPageNotFound(route) {
+    errTracker.uploadErr(
+      '404',
+      new Error(`404:${route.path}-${JSON.stringify(route.query)}`)
+    )
+  },
+  globalData: {}
 }
 </script>
 
 <style lang="scss">
 // uview 基础样式
-@import "uview-ui/index.scss";
+@import 'uview-ui/index.scss';
 
-page {
-  background-color: #201178;
+body,
+html {
+  user-select: initial;
 }
 
-// 骨架屏定位
-.afa-skeleton {
-  position: relative;
+page {
+  font-size: 38rpx;
+  background-color: #00000a;
+  color: #f3f6f9;
+  word-break: break-all;
+}
+
+.ec-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 </style>
